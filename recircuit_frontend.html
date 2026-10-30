@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReCircuit | Sustainable Electronics Reuse</title>
+<style>
+:root{--green:#16845b;--green2:#0d6847;--mint:#e8f7ef;--ink:#172b25;--muted:#66766f;--line:#e4ebe7;--bg:#f7faf8;--white:#fff;--orange:#f0a34a}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.topbar{background:#123d2e;color:#e9fff4;padding:9px 5%;text-align:center;font-size:12px;letter-spacing:.2px}
+nav{height:76px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 5%;gap:20px;position:sticky;top:0;z-index:10}
+.brand{display:flex;align-items:center;gap:10px;font-weight:850;font-size:21px;letter-spacing:-.7px}.brand-icon{width:38px;height:38px;border-radius:12px;background:var(--green);color:white;display:grid;place-items:center;font-size:21px}.brand span:last-child{color:var(--green)}
+.navlinks{display:flex;align-items:center;gap:25px}.navlinks a{color:#4e6058;text-decoration:none;font-size:14px;font-weight:600}.navlinks a:hover{color:var(--green)}
+.nav-actions{display:flex;gap:10px;align-items:center}.btn{border:0;border-radius:11px;padding:12px 17px;font-weight:700;font-size:13px;transition:.2s}.btn-primary{background:var(--green);color:white}.btn-primary:hover{background:var(--green2);transform:translateY(-1px)}.btn-outline{background:#fff;border:1px solid #d5e2db;color:var(--ink)}.btn-light{background:var(--mint);color:var(--green2)}.cart{position:relative;border:1px solid var(--line);border-radius:11px;background:#fff;padding:11px 13px}.cart-count{background:#f0a34a;color:#fff;border-radius:50%;font-size:10px;padding:2px 5px;position:absolute;top:-7px;right:-6px}
+main{max-width:1200px;margin:auto;padding:30px 24px 60px}.hero{background:linear-gradient(120deg,#e8f7ef 0%,#f1faf5 55%,#fdf7eb 100%);border:1px solid #dcefe4;border-radius:25px;padding:48px 5%;display:grid;grid-template-columns:1.2fr .8fr;gap:25px;align-items:center;overflow:hidden;position:relative}.eyebrow{color:var(--green);font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;display:flex;align-items:center;gap:8px}.dot{width:7px;height:7px;background:var(--green);border-radius:50%}.hero h1{font-size:clamp(35px,4.4vw,57px);line-height:1.06;letter-spacing:-2px;margin:18px 0}.hero h1 em{font-style:normal;color:var(--green)}.hero p{color:#5c7066;line-height:1.7;max-width:520px;font-size:15px}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}.hero-note{font-size:12px;color:#64776e;margin-top:20px}.hero-art{display:grid;place-items:center;min-height:250px;position:relative}.orbit{width:260px;height:260px;border-radius:50%;border:1px dashed #9dcdb3;display:grid;place-items:center;position:relative;background:rgba(255,255,255,.42)}.chip{width:142px;height:142px;background:linear-gradient(145deg,#205b47,#103b2d);border-radius:22px;box-shadow:0 18px 35px #174f3b35;display:grid;place-items:center;color:#b9f2d3;font-size:55px;position:relative}.chip:after{content:"";position:absolute;inset:-10px;border:2px solid #72b796;border-radius:27px;z-index:-1}.float{position:absolute;background:white;border:1px solid #dcece3;border-radius:13px;padding:11px 13px;box-shadow:0 8px 20px #174f3b12;font-size:12px;font-weight:700}.float small{display:block;color:var(--muted);font-weight:500;margin-top:3px}.f1{top:18px;right:-5px}.f2{bottom:22px;left:-12px}.f3{bottom:35px;right:-10px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:20px 0 35px}.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:19px;display:flex;align-items:center;gap:13px}.stat-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:var(--mint);font-size:20px}.stat strong{font-size:22px;display:block;letter-spacing:-.5px}.stat small{color:var(--muted);font-size:12px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:15px;margin:32px 0 18px}.section-head h2{margin:0;font-size:26px;letter-spacing:-.8px}.section-head p{margin:6px 0 0;color:var(--muted);font-size:13px}.text-link{color:var(--green);font-weight:750;font-size:13px;text-decoration:none;cursor:pointer}
+.category-row{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}.category{border:1px solid var(--line);background:white;border-radius:15px;padding:17px 12px;text-align:center;cursor:pointer;transition:.2s}.category:hover,.category.active{border-color:#81c7a3;background:#f0faf4;transform:translateY(-2px)}.category .emoji{font-size:27px;display:block;margin-bottom:9px}.category b{font-size:12px;display:block}.category small{color:var(--muted);font-size:11px}
+.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:17px}.search{flex:1;min-width:220px;position:relative}.search input{width:100%;padding:13px 15px 13px 42px;border:1px solid var(--line);border-radius:12px;background:#fff;outline:none}.search input:focus{border-color:#78bd98;box-shadow:0 0 0 3px #16845b12}.search span{position:absolute;left:14px;top:11px;color:#7b8b83;font-size:18px}.toolbar select{padding:13px;border:1px solid var(--line);border-radius:12px;background:white;color:#4c5f55}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.product{background:#fff;border:1px solid var(--line);border-radius:17px;overflow:hidden;transition:.2s}.product:hover{transform:translateY(-3px);box-shadow:0 12px 28px #153d2a0c}.product-visual{height:145px;display:grid;place-items:center;position:relative;background:#f0f6f2;font-size:58px}.product:nth-child(3n+2) .product-visual{background:#f5f1e9}.product:nth-child(3n) .product-visual{background:#edf2fa}.tag{position:absolute;left:12px;top:12px;background:#fff;border-radius:7px;padding:5px 8px;font-size:10px;font-weight:800;color:var(--green)}.heart{position:absolute;right:12px;top:10px;border:0;background:#ffffffd9;border-radius:50%;width:29px;height:29px;font-size:16px;color:#64766d}.product-body{padding:15px}.product-type{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;font-weight:750}.product h3{font-size:14px;margin:7px 0 8px}.condition{font-size:11px;color:#557064;display:flex;align-items:center;gap:5px}.condition:before{content:"✓";width:16px;height:16px;border-radius:50%;display:grid;place-items:center;background:#e2f6e9;color:#16845b;font-weight:900}.price-row{display:flex;align-items:center;justify-content:space-between;margin-top:15px}.price{font-size:19px;font-weight:850}.price small{font-size:10px;font-weight:500;color:var(--muted)}.add{border:0;border-radius:9px;background:var(--mint);color:var(--green2);font-weight:800;width:34px;height:34px;font-size:20px}.add:hover{background:var(--green);color:white}
+.promo{margin-top:36px;background:#153e30;color:white;border-radius:22px;padding:29px 4%;display:flex;align-items:center;justify-content:space-between;gap:20px}.promo h2{font-size:23px;margin:0 0 7px}.promo p{color:#c8e0d3;margin:0;font-size:13px;line-height:1.5}.promo .btn{white-space:nowrap;background:#d7f6e3;color:#164e37}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:15px}.how{background:white;border:1px solid var(--line);border-radius:15px;padding:20px}.how .num{color:var(--green);font-size:12px;font-weight:900;letter-spacing:1px}.how h3{font-size:15px;margin:10px 0 6px}.how p{font-size:12px;line-height:1.6;color:var(--muted);margin:0}
+footer{background:#fff;border-top:1px solid var(--line);padding:28px 5%;display:flex;justify-content:space-between;align-items:center;gap:15px;color:var(--muted);font-size:12px}.foot-brand{font-weight:800;color:var(--ink);font-size:14px}
+.modal-backdrop{position:fixed;inset:0;background:#10271dbb;display:none;align-items:center;justify-content:center;padding:20px;z-index:30}.modal-backdrop.show{display:flex}.modal{background:white;border-radius:20px;padding:25px;width:min(520px,100%);max-height:90vh;overflow:auto;box-shadow:0 25px 80px #0003}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.modal-head h2{font-size:21px;margin:0}.close{border:0;background:#f1f5f2;border-radius:9px;width:33px;height:33px;font-size:20px}.field{margin:13px 0}.field label{display:block;font-size:12px;font-weight:750;margin-bottom:7px}.field input,.field select,.field textarea{width:100%;border:1px solid #dce6e0;border-radius:10px;padding:12px;outline:none;background:#fff}.field textarea{resize:vertical;min-height:75px}.field input:focus,.field select:focus{border-color:#78bd98}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.notice{padding:12px;border-radius:10px;background:#f0faf4;color:#34644d;font-size:12px;line-height:1.5}.empty{grid-column:1/-1;text-align:center;padding:45px 15px;color:var(--muted);background:white;border:1px dashed #cddbd2;border-radius:15px}.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#143e2e;color:white;padding:13px 18px;border-radius:12px;font-size:13px;box-shadow:0 8px 25px #0002;transition:.25s;z-index:50}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:900px){.navlinks{display:none}.hero{grid-template-columns:1fr}.hero-art{min-height:220px}.stats{grid-template-columns:repeat(2,1fr)}.category-row{grid-template-columns:repeat(3,1fr)}.products{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){nav{height:65px;padding:0 4%}.brand{font-size:18px}.nav-actions .btn-outline{display:none}main{padding:18px 14px 40px}.hero{padding:30px 22px}.hero h1{letter-spacing:-1.5px}.hero-art{min-height:200px}.orbit{width:205px;height:205px}.chip{width:110px;height:110px;font-size:42px}.f1{right:-18px}.f2{left:-12px}.f3{right:-14px}.stats{gap:9px}.stat{padding:13px;gap:9px}.stat-icon{width:34px;height:34px}.stat strong{font-size:18px}.stat small{font-size:10px}.category-row{gap:8px}.category{padding:13px 6px}.category b{font-size:11px}.products{gap:10px}.product-visual{height:115px;font-size:46px}.product-body{padding:12px}.product h3{font-size:13px}.price{font-size:17px}.section-head h2{font-size:22px}.promo{align-items:flex-start;flex-direction:column}.how-grid{grid-template-columns:1fr}footer{flex-direction:column;align-items:flex-start}.form-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="topbar">♻ Give electronics a second life — reuse more, waste less.</div>
+<nav>
+  <div class="brand"><div class="brand-icon">↻</div>Re<span>Circuit</span></div>
+  <div class="navlinks"><a href="#marketplace">Marketplace</a><a href="#how">How it works</a><a href="#impact">Our impact</a></div>
+  <div class="nav-actions"><button class="btn btn-outline" onclick="openModal()">＋ List a component</button><button class="cart" onclick="showCart()">🛒 <span class="cart-count" id="cartCount">0</span></button></div>
+</nav>
+<main>
+<section class="hero">
+  <div>
+    <div class="eyebrow"><span class="dot"></span> Sustainable Electronics Reuse</div>
+    <h1>Good components.<br><em>Second chances.</em></h1>
+    <p>A community marketplace for tested, affordable electronic components. Build more prototypes, spend less, and keep useful electronics out of landfills.</p>
+    <div class="hero-actions"><button class="btn btn-primary" onclick="document.querySelector('#marketplace').scrollIntoView({behavior:'smooth'})">Explore components ↗</button><button class="btn btn-outline" onclick="openModal()">＋ Sell or donate</button></div>
+    <div class="hero-note">✓ Quality-checked listings &nbsp; ✓ Student-friendly prices &nbsp; ✓ Circular electronics</div>
+  </div>
+  <div class="hero-art"><div class="orbit"><div class="chip">⌘</div><div class="float f1">✓ Verified parts<small>Checked before listing</small></div><div class="float f2">♻ Reuse first<small>Reduce e-waste</small></div><div class="float f3">₹ Save more<small>Affordable prototyping</small></div></div></div>
+</section>
+<section class="stats" id="impact">
+  <div class="stat"><div class="stat-icon">♻</div><div><strong id="reuseStat">1,240+</strong><small>Components reused*</small></div></div>
+  <div class="stat"><div class="stat-icon">🧪</div><div><strong>98%</strong><small>Quality checked*</small></div></div>
+  <div class="stat"><div class="stat-icon">🎓</div><div><strong>350+</strong><small>Makers supported*</small></div></div>
+  <div class="stat"><div class="stat-icon">🌱</div><div><strong>Low waste</strong><small>Reuse before recycling</small></div></div>
+</section>
+<section>
+  <div class="section-head"><div><h2>Browse by category</h2><p>Find the right part for your next project.</p></div><a class="text-link" onclick="filterCategory('All')">View all →</a></div>
+  <div class="category-row" id="categories">
+    <div class="category active" onclick="filterCategory('All',this)"><span class="emoji">🧩</span><b>All parts</b><small>Everything</small></div>
+    <div class="category" onclick="filterCategory('ICs',this)"><span class="emoji">🔲</span><b>ICs & chips</b><small>Logic & control</small></div>
+    <div class="category" onclick="filterCategory('Resistors',this)"><span class="emoji">〰️</span><b>Resistors</b><small>Passive parts</small></div>
+    <div class="category" onclick="filterCategory('Boards',this)"><span class="emoji">🟩</span><b>Boards</b><small>Prototyping</small></div>
+    <div class="category" onclick="filterCategory('Sensors',this)"><span class="emoji">📡</span><b>Sensors</b><small>Input & output</small></div>
+    <div class="category" onclick="filterCategory('Transistors',this)"><span class="emoji">🔌</span><b>Transistors</b><small>Switching parts</small></div>
+  </div>
+</section>
+<section id="marketplace">
+  <div class="section-head"><div><h2>Ready for a new project</h2><p>Affordable components, checked for reuse.</p></div><span class="text-link" id="resultCount">8 components</span></div>
+  <div class="toolbar"><div class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Search components, e.g. Arduino, resistor..." oninput="renderProducts()"></div><select id="sortSelect" onchange="renderProducts()"><option value="featured">Sort: Featured</option><option value="low">Price: Low to high</option><option value="high">Price: High to low</option></select><select id="conditionSelect" onchange="renderProducts()"><option value="all">All conditions</option><option value="Excellent">Excellent</option><option value="Good">Good</option></select></div>
+  <div class="products" id="productGrid"></div>
+</section>
+<section class="promo"><div><h2>Have spare components lying around?</h2><p>List them for reuse, donate them to learners, or route defective parts for responsible recycling.</p></div><button class="btn" onclick="openModal()">List a component →</button></section>
+<section id="how">
+  <div class="section-head"><div><h2>Reuse is a simple process</h2><p>Extending component life starts with one small step.</p></div></div>
+  <div class="how-grid">
+    <div class="how"><div class="num">STEP 01</div><h3>📦 Collect & list</h3><p>Students, colleges, repair shops, and makers submit unused electronic parts with condition and quantity details.</p></div>
+    <div class="how"><div class="num">STEP 02</div><h3>🧪 Test & verify</h3><p>Components are inspected and their condition is recorded before being marked as verified for reuse.</p></div>
+    <div class="how"><div class="num">STEP 03</div><h3>♻ Reuse or recycle</h3><p>Working parts find a new owner. Defective parts are directed to responsible material-recovery partners.</p></div>
+  </div>
+</section>
+<p style="font-size:11px;color:#87958e;margin-top:26px">*Illustrative demo figures for the frontend prototype, not live project data. Orders, verification, and recycling partner integrations require a backend.</p>
+</main>
+<footer><div><div class="foot-brand">↻ ReCircuit — Sustainable Electronics Reuse</div><div style="margin-top:6px">A Community Engagement Project · SY CSE · 2026–27</div></div><div>Reuse responsibly. Build sustainably. © 2026 ReCircuit</div></footer>
+<div class="modal-backdrop" id="sellModal" onclick="if(event.target===this)closeModal()">
+ <div class="modal"><div class="modal-head"><h2>List a component</h2><button class="close" onclick="closeModal()">×</button></div>
+ <div class="notice">Share details about your unused component. In a full system, the team would inspect it before marking it verified.</div>
+ <form id="sellForm">
+  <div class="field"><label>Component name *</label><input id="sellName" required placeholder="e.g. Arduino Uno R3"></div>
+  <div class="form-row"><div class="field"><label>Category *</label><select id="sellCategory" required><option value="">Choose category</option><option>ICs</option><option>Resistors</option><option>Boards</option><option>Sensors</option><option>Transistors</option><option>Other</option></select></div><div class="field"><label>Condition *</label><select id="sellCondition" required><option>Good</option><option>Excellent</option><option>Defective</option></select></div></div>
+  <div class="form-row"><div class="field"><label>Quantity *</label><input id="sellQty" type="number" min="1" value="1" required></div><div class="field"><label>Price per item (₹)</label><input id="sellPrice" type="number" min="0" value="0" required></div></div>
+  <div class="field"><label>Choose an option *</label><select id="sellRoute"><option>Sell for reuse</option><option>Donate to students</option><option>Send for recycling</option></select></div>
+  <div class="field"><label>Additional notes</label><textarea id="sellNotes" placeholder="Testing details, model number, etc."></textarea></div>
+  <button class="btn btn-primary" type="submit" style="width:100%">Submit listing</button>
+ </form></div>
+</div>
+<div class="modal-backdrop" id="cartModal" onclick="if(event.target===this)closeCart()"><div class="modal"><div class="modal-head"><h2>Your cart</h2><button class="close" onclick="closeCart()">×</button></div><div id="cartItems"></div><div id="cartFooter"></div></div></div>
+<div class="toast" id="toast"></div>
+<script>
+const products=[
+{id:1,name:'NE555 Timer IC',category:'ICs',emoji:'🔲',price:12,old:20,condition:'Excellent',tag:'Popular',desc:'Timer and oscillator IC'},
+{id:2,name:'Resistor Assortment (20 pcs)',category:'Resistors',emoji:'〰️',price:18,old:30,condition:'Good',tag:'Bundle',desc:'Mixed values for prototyping'},
+{id:3,name:'Arduino Uno Compatible',category:'Boards',emoji:'🟩',price:180,old:350,condition:'Excellent',tag:'Verified',desc:'Microcontroller development board'},
+{id:4,name:'HC-SR04 Ultrasonic Sensor',category:'Sensors',emoji:'📡',price:45,old:80,condition:'Good',tag:'Tested',desc:'Distance measurement sensor'},
+{id:5,name:'BC547 Transistor (10 pcs)',category:'Transistors',emoji:'🔌',price:15,old:25,condition:'Excellent',tag:'Bundle',desc:'General-purpose NPN transistor'},
+{id:6,name:'Breadboard 400 points',category:'Boards',emoji:'▦',price:35,old:60,condition:'Good',tag:'Student pick',desc:'Solderless prototyping board'},
+{id:7,name:'LM358 Op-Amp IC',category:'ICs',emoji:'🔳',price:10,old:18,condition:'Excellent',tag:'Verified',desc:'Dual operational amplifier'},
+{id:8,name:'DHT11 Temperature Sensor',category:'Sensors',emoji:'🌡️',price:55,old:95,condition:'Good',tag:'Tested',desc:'Temperature and humidity module'}
+];
+let activeCategory='All',cart={},customProducts=[],nextId=9;
+function allProducts(){return [...products,...customProducts]}
+function renderProducts(){
+ const q=document.getElementById('searchInput').value.toLowerCase(),sort=document.getElementById('sortSelect').value,cond=document.getElementById('conditionSelect').value;
+ let arr=allProducts().filter(p=>(activeCategory==='All'||p.category===activeCategory)&&(p.name.toLowerCase().includes(q)||p.category.toLowerCase().includes(q)||p.desc.toLowerCase().includes(q))&&(cond==='all'||p.condition===cond));
+ if(sort==='low')arr.sort((a,b)=>a.price-b.price);if(sort==='high')arr.sort((a,b)=>b.price-a.price);
+ document.getElementById('resultCount').textContent=arr.length+' component'+(arr.length===1?'':'s');
+ const grid=document.getElementById('productGrid');
+ if(!arr.length){grid.innerHTML='<div class="empty">🔎<h3>No components found</h3><p>Try another search or category.</p><button class="btn btn-light" onclick="clearFilters()">Clear filters</button></div>';return}
+ grid.innerHTML=arr.map(p=>`<article class="product"><div class="product-visual"><span>${p.emoji||'🔧'}</span><span class="tag">${escapeHtml(p.tag||'New listing')}</span><button class="heart" title="Save item" onclick="toast('Saved to your wishlist (demo)')">♡</button></div><div class="product-body"><div class="product-type">${escapeHtml(p.category)}</div><h3>${escapeHtml(p.name)}</h3><div class="condition">${escapeHtml(p.condition==='Defective'?'Recycling required':p.condition+' condition')}</div><div class="price-row"><div><span class="price">₹${Number(p.price).toLocaleString('en-IN')}</span> <small><s>₹${Number(p.old||p.price).toLocaleString('en-IN')}</s></small></div><button class="add" aria-label="Add ${escapeHtml(p.name)} to cart" onclick="addToCart(${p.id})">+</button></div></div></article>`).join('');
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function filterCategory(cat,el){activeCategory=cat;document.querySelectorAll('.category').forEach(x=>x.classList.remove('active'));if(el)el.classList.add('active');else if(cat==='All')document.querySelector('.category').classList.add('active');renderProducts();if(document.getElementById('marketplace'))document.getElementById('marketplace').scrollIntoView({behavior:'smooth',block:'start'})}
+function clearFilters(){activeCategory='All';document.getElementById('searchInput').value='';document.getElementById('conditionSelect').value='all';document.querySelectorAll('.category').forEach(x=>x.classList.remove('active'));document.querySelector('.category').classList.add('active');renderProducts()}
+function addToCart(id){const p=allProducts().find(x=>x.id===id);if(!p)return;if(p.condition==='Defective'){toast('Defective items are routed to recycling, not the cart.');return}cart[id]=(cart[id]||0)+1;updateCartCount();toast(p.name+' added to cart')}
+function updateCartCount(){document.getElementById('cartCount').textContent=Object.values(cart).reduce((a,b)=>a+b,0)}
+function showCart(){const modal=document.getElementById('cartModal');modal.classList.add('show');const entries=Object.entries(cart).map(([id,qty])=>({p:allProducts().find(p=>p.id===Number(id)),qty})).filter(x=>x.p);const box=document.getElementById('cartItems');const foot=document.getElementById('cartFooter');if(!entries.length){box.innerHTML='<div class="empty">Your cart is empty.<p>Browse components and add something for your next project.</p></div>';foot.innerHTML='';return}box.innerHTML=entries.map(({p,qty})=>`<div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #e7eee9"><div style="font-size:28px">${p.emoji}</div><div style="flex:1"><b>${escapeHtml(p.name)}</b><div style="font-size:12px;color:#66766f">₹${p.price} × ${qty}</div></div><button class="btn btn-outline" onclick="changeQty(${p.id},-1)">−</button><button class="btn btn-outline" onclick="changeQty(${p.id},1)">+</button></div>`).join('');const total=entries.reduce((sum,x)=>sum+x.p.price*x.qty,0);foot.innerHTML=`<div style="display:flex;justify-content:space-between;padding:18px 0;font-size:18px;font-weight:800">Estimated total <span>₹${total.toLocaleString('en-IN')}</span></div><div class="notice">Demo checkout only. A real order requires a secure backend and payment integration.</div><button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="checkoutDemo()">Continue (demo)</button>`}
+function changeQty(id,n){cart[id]=(cart[id]||0)+n;if(cart[id]<=0)delete cart[id];updateCartCount();showCart()}
+function closeCart(){document.getElementById('cartModal').classList.remove('show')}
+function checkoutDemo(){closeCart();toast('Demo only — connect a backend to place orders.')}
+function openModal(){document.getElementById('sellModal').classList.add('show')}
+function closeModal(){document.getElementById('sellModal').classList.remove('show')}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove('show'),2600)}
+document.getElementById('sellForm').addEventListener('submit',e=>{e.preventDefault();const name=document.getElementById('sellName').value.trim(),category=document.getElementById('sellCategory').value,condition=document.getElementById('sellCondition').value,qty=Number(document.getElementById('sellQty').value),price=Number(document.getElementById('sellPrice').value),route=document.getElementById('sellRoute').value,notes=document.getElementById('sellNotes').value.trim();if(!name||!category||qty<1||price<0)return;if(route==='Send for recycling'||condition==='Defective'){closeModal();e.target.reset();toast('Recycling request recorded in this demo.');return}customProducts.push({id:nextId++,name,category,emoji:({ICs:'🔲',Resistors:'〰️',Boards:'🟩',Sensors:'📡',Transistors:'🔌',Other:'🔧'})[category]||'🔧',price,old:price,condition,tag:route==='Donate to students'?'Community donation':'Pending inspection',desc:notes||'Community-submitted component'});closeModal();e.target.reset();activeCategory='All';document.querySelectorAll('.category').forEach(x=>x.classList.remove('active'));document.querySelector('.category').classList.add('active');renderProducts();toast('Listing added to this demo marketplace.');document.getElementById('marketplace').scrollIntoView({behavior:'smooth'})});
+renderProducts();
+</script>
+</body>
+</html>
