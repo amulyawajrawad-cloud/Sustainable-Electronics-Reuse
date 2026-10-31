@@ -1,0 +1,43 @@
+/* Additions for the backend-connected UI. Reuses the variables/classes of recircuit_frontend.css. */
+.hide { display: none !important }
+.form-error { color: #b3261e; font-size: 12.5px; margin: 10px 0 0; min-height: 0 }
+.form-error:empty { display: none }
+.field input[type=file] { padding: 9px; font-size: 12px }
+.field small { color: var(--muted); font-size: 11.5px }
+.link-btn { background: none; border: 0; color: var(--green2); font-weight: 700; padding: 0; text-decoration: underline }
+.loading { grid-column: 1/-1; text-align: center; padding: 45px 15px; color: var(--muted) }
+.spinner { width: 22px; height: 22px; border: 3px solid #cfe3d8; border-top-color: var(--green);
+  border-radius: 50%; animation: spin .8s linear infinite; margin: 0 auto 10px }
+@keyframes spin { to { transform: rotate(360deg) } }
+.btn[disabled] { opacity: .6; cursor: progress }
+
+/* product images */
+.product-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover }
+.product-visual .tag, .product-visual .heart { z-index: 1 }
+
+/* user menu */
+.user-menu { position: relative }
+.user-menu .menu { position: absolute; right: 0; top: calc(100% + 8px); background: #fff; border: 1px solid var(--line);
+  border-radius: 12px; box-shadow: 0 14px 40px #0002; min-width: 190px; padding: 6px; display: none; z-index: 25 }
+.user-menu.open .menu { display: block }
+.user-menu .menu button { display: block; width: 100%; text-align: left; background: none; border: 0; padding: 10px 12px;
+  border-radius: 8px; font-size: 13.5px }
+.user-menu .menu button:hover { background: var(--mint) }
+
+/* tabs */
+.tabs { display: flex; gap: 6px; background: #f0f6f2; padding: 4px; border-radius: 11px; margin: 14px 0 4px }
+.tabs button { flex: 1; border: 0; background: none; padding: 9px; border-radius: 8px; font-weight: 700; color: var(--muted) }
+.tabs button.active { background: #fff; color: var(--ink); box-shadow: 0 1px 4px #0001 }
+
+/* status badges */
+.badge { display: inline-block; border-radius: 999px; padding: 3px 10px; font-size: 11px; font-weight: 800 }
+.badge.pending { background: #fff3dc; color: #8a5a00 }
+.badge.approved { background: #dff5e8; color: #0d6847 }
+.badge.rejected { background: #fde4e1; color: #b3261e }
+.badge.recycle { background: #e8eefc; color: #31509c }
+
+.sub-item { padding: 13px 0; border-bottom: 1px solid #e7eee9; display: flex; gap: 12px; align-items: flex-start }
+.sub-item .grow { flex: 1; min-width: 0 }
+.sub-item small, .muted { color: var(--muted); font-size: 12px }
+.sub-note { background: #f7faf8; border-left: 3px solid #cfe3d8; padding: 7px 10px; margin-top: 7px; font-size: 12.5px; border-radius: 4px }
+.cart-qty { display: flex; gap: 6px }

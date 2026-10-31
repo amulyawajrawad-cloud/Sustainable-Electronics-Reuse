@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReCircuit | Sustainable Electronics Reuse</title>
+  <link rel="stylesheet" href="recircuit_frontend.css">
+  <link rel="stylesheet" href="recircuit_app.css">
+  <script src="api.js" defer></script>
+  <script src="recircuit_frontend.js" defer></script>
+</head>
+
+<body>
+  <div class="topbar">♻ Give electronics a second life — reuse more, waste less.</div>
+  <nav>
+    <div class="brand">
+      <div class="brand-icon">↻</div>Re<span>Circuit</span>
+    </div>
+    <div class="navlinks"><a href="#marketplace">Marketplace</a><a href="#how">How it works</a><a href="#impact">Our
+        impact</a></div>
+    <div class="nav-actions"><button class="btn btn-outline" onclick="openModal()">＋ List a component</button>
+      <div id="authArea"></div><button
+        class="cart" onclick="showCart()">🛒 <span class="cart-count" id="cartCount">0</span></button></div>
+  </nav>
+  <main>
+    <section class="hero">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> Sustainable Electronics Reuse</div>
+        <h1>Good components.<br><em>Second chances.</em></h1>
+        <p>A community marketplace for tested, affordable electronic components. Build more prototypes, spend less, and
+          keep useful electronics out of landfills.</p>
+        <div class="hero-actions"><button class="btn btn-primary"
+            onclick="document.querySelector('#marketplace').scrollIntoView({behavior:'smooth'})">Explore components
+            ↗</button><button class="btn btn-outline" onclick="openModal()">＋ Sell or donate</button></div>
+        <div class="hero-note">✓ Quality-checked listings &nbsp; ✓ Student-friendly prices &nbsp; ✓ Circular electronics
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="orbit">
+          <div class="chip">⌘</div>
+          <div class="float f1">✓ Verified parts<small>Checked before listing</small></div>
+          <div class="float f2">♻ Reuse first<small>Reduce e-waste</small></div>
+          <div class="float f3">₹ Save more<small>Affordable prototyping</small></div>
+        </div>
+      </div>
+    </section>
+    <section class="stats" id="impact">
+      <div class="stat">
+        <div class="stat-icon">♻</div>
+        <div><strong id="reuseStat">1,240+</strong><small>Components reused*</small></div>
+      </div>
+      <div class="stat">
+        <div class="stat-icon">🧪</div>
+        <div><strong>98%</strong><small>Quality checked*</small></div>
+      </div>
+      <div class="stat">
+        <div class="stat-icon">🎓</div>
+        <div><strong>350+</strong><small>Makers supported*</small></div>
+      </div>
+      <div class="stat">
+        <div class="stat-icon">🌱</div>
+        <div><strong>Low waste</strong><small>Reuse before recycling</small></div>
+      </div>
+    </section>
+    <section>
+      <div class="section-head">
+        <div>
+          <h2>Browse by category</h2>
+          <p>Find the right part for your next project.</p>
+        </div><a class="text-link" onclick="filterCategory('All')">View all →</a>
+      </div>
+      <div class="category-row" id="categories">
+        <div class="category active" onclick="filterCategory('All',this)"><span class="emoji">🧩</span><b>All
+            parts</b><small>Everything</small></div>
+        <div class="category" onclick="filterCategory('ICs',this)"><span class="emoji">🔲</span><b>ICs &
+            chips</b><small>Logic & control</small></div>
+        <div class="category" onclick="filterCategory('Resistors',this)"><span
+            class="emoji">〰️</span><b>Resistors</b><small>Passive parts</small></div>
+        <div class="category" onclick="filterCategory('Boards',this)"><span
+            class="emoji">🟩</span><b>Boards</b><small>Prototyping</small></div>
+        <div class="category" onclick="filterCategory('Sensors',this)"><span
+            class="emoji">📡</span><b>Sensors</b><small>Input & output</small></div>
+        <div class="category" onclick="filterCategory('Transistors',this)"><span
+            class="emoji">🔌</span><b>Transistors</b><small>Switching parts</small></div>
+      </div>
+    </section>
+    <section id="marketplace">
+      <div class="section-head">
+        <div>
+          <h2>Ready for a new project</h2>
+          <p>Affordable components, checked for reuse.</p>
+        </div><span class="text-link" id="resultCount">8 components</span>
+      </div>
+      <div class="toolbar">
+        <div class="search"><span>⌕</span><input id="searchInput" type="search"
+            placeholder="Search components, e.g. Arduino, resistor..." oninput="renderProducts()"></div><select
+          id="sortSelect" onchange="renderProducts()">
+          <option value="featured">Sort: Featured</option>
+          <option value="low">Price: Low to high</option>
+          <option value="high">Price: High to low</option>
+        </select><select id="conditionSelect" onchange="renderProducts()">
+          <option value="all">All conditions</option>
+          <option value="Excellent">Excellent</option>
+          <option value="Good">Good</option>
+        </select>
+      </div>
+      <div class="products" id="productGrid"><div class="loading"><div class="spinner"></div>Loading components…</div></div>
+    </section>
+    <section class="promo">
+      <div>
+        <h2>Have spare components lying around?</h2>
+        <p>List them for reuse, donate them to learners, or route defective parts for responsible recycling.</p>
+      </div><button class="btn" onclick="openModal()">List a component →</button>
+    </section>
+    <section id="how">
+      <div class="section-head">
+        <div>
+          <h2>Reuse is a simple process</h2>
+          <p>Extending component life starts with one small step.</p>
+        </div>
+      </div>
+      <div class="how-grid">
+        <div class="how">
+          <div class="num">STEP 01</div>
+          <h3>📦 Collect & list</h3>
+          <p>Students, colleges, repair shops, and makers submit unused electronic parts with condition and quantity
+            details.</p>
+        </div>
+        <div class="how">
+          <div class="num">STEP 02</div>
+          <h3>🧪 Test & verify</h3>
+          <p>Components are inspected and their condition is recorded before being marked as verified for reuse.</p>
+        </div>
+        <div class="how">
+          <div class="num">STEP 03</div>
+          <h3>♻ Reuse or recycle</h3>
+          <p>Working parts find a new owner. Defective parts are directed to responsible material-recovery partners.</p>
+        </div>
+      </div>
+    </section>
+    <p style="font-size:11px;color:#87958e;margin-top:26px">*Illustrative demo figures for the frontend prototype, not
+      live project data. Orders, verification, and recycling partner integrations require a backend.</p>
+  </main>
+  <footer>
+    <div>
+      <div class="foot-brand">↻ ReCircuit — Sustainable Electronics Reuse</div>
+      <div style="margin-top:6px">A Community Engagement Project · SY CSE · 2026–27</div>
+    </div>
+    <div>Reuse responsibly. Build sustainably. © 2026 ReCircuit · <a href="/admin" style="color:inherit">Admin</a></div>
+  </footer>
+  <div class="modal-backdrop" id="sellModal" onclick="if(event.target===this)closeModal()">
+    <div class="modal">
+      <div class="modal-head">
+        <h2>List a component</h2><button class="close" onclick="closeModal()">×</button>
+      </div>
+      <div class="notice">Share details about your unused component. Our team inspects every listing before it is
+        published — track its status under <b>My submissions</b>.</div>
+      <form id="sellForm">
+        <div class="field"><label>Component name *</label><input id="sellName" required
+            placeholder="e.g. Arduino Uno R3"></div>
+        <div class="form-row">
+          <div class="field"><label>Category *</label><select id="sellCategory" required>
+              <option value="">Choose category</option>
+              <option>ICs</option>
+              <option>Resistors</option>
+              <option>Boards</option>
+              <option>Sensors</option>
+              <option>Transistors</option>
+              <option>Other</option>
+            </select></div>
+          <div class="field"><label>Condition *</label><select id="sellCondition" required>
+              <option>Good</option>
+              <option>Excellent</option>
+              <option>Defective</option>
+            </select></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label>Quantity *</label><input id="sellQty" type="number" min="1" value="1" required>
+          </div>
+          <div class="field"><label>Price per item (₹)</label><input id="sellPrice" type="number" min="0" value="0"
+              required></div>
+        </div>
+        <div class="field"><label>Choose an option *</label><select id="sellRoute">
+            <option>Sell for reuse</option>
+            <option>Donate to students</option>
+            <option>Send for recycling</option>
+          </select></div>
+        <div class="field"><label>Additional notes</label><textarea id="sellNotes"
+            placeholder="Testing details, model number, etc."></textarea></div>
+        <div class="field"><label>Photos (optional)</label><input id="sellImages" type="file" multiple
+            accept="image/png,image/jpeg,image/gif,image/webp"><small>Up to 3 images, 2 MB each.</small></div>
+        <div class="form-error" id="sellError"></div>
+        <button class="btn btn-primary" id="sellBtn" type="submit" style="width:100%;margin-top:12px">Submit for review</button>
+      </form>
+    </div>
+  </div>
+  <div class="modal-backdrop" id="cartModal" onclick="if(event.target===this)closeCart()">
+    <div class="modal">
+      <div class="modal-head">
+        <h2>Your cart</h2><button class="close" onclick="closeCart()">×</button>
+      </div>
+      <div id="cartItems"></div>
+      <div id="cartFooter"></div>
+    </div>
+  </div>
+    <div class="modal-backdrop" id="authModal" onclick="if(event.target===this)closeAuth()">
+    <div class="modal">
+      <div class="modal-head">
+        <h2 id="authTitle">Welcome back</h2><button class="close" onclick="closeAuth()">×</button>
+      </div>
+      <div class="notice hide" id="authMsg"></div>
+      <div class="tabs"><button id="tabLogin" class="active" onclick="setAuthMode('login')">Log in</button><button
+          id="tabRegister" onclick="setAuthMode('register')">Sign up</button></div>
+      <form id="authForm">
+        <div class="field register-only hide"><label>Full name *</label><input id="authName" autocomplete="name"></div>
+        <div class="field"><label>Email *</label><input id="authEmail" type="email" required autocomplete="email"></div>
+        <div class="field"><label>Password *</label><input id="authPassword" type="password" required minlength="8"
+            autocomplete="current-password"><small class="register-only hide">At least 8 characters.</small></div>
+        <div class="form-row register-only hide">
+          <div class="field"><label>Phone</label><input id="authPhone" autocomplete="tel"></div>
+          <div class="field"><label>College / organization</label><input id="authOrg"></div>
+        </div>
+        <div class="form-error" id="authError"></div>
+        <button class="btn btn-primary" id="authBtn" type="submit" style="width:100%;margin-top:12px">Log in</button>
+      </form>
+    </div>
+  </div>
+  <div class="modal-backdrop" id="profileModal" onclick="if(event.target===this)closeProfile()">
+    <div class="modal">
+      <div class="modal-head">
+        <h2>Your profile</h2><button class="close" onclick="closeProfile()">×</button>
+      </div>
+      <form id="profileForm">
+        <div class="field"><label>Email</label><input id="profEmail" disabled></div>
+        <div class="field"><label>Full name *</label><input id="profName" required></div>
+        <div class="form-row">
+          <div class="field"><label>Phone</label><input id="profPhone"></div>
+          <div class="field"><label>College / organization</label><input id="profOrg"></div>
+        </div>
+        <div class="form-error" id="profError"></div>
+        <button class="btn btn-primary" type="submit" style="width:100%;margin-top:12px">Save profile</button>
+      </form>
+      <hr style="border:0;border-top:1px solid var(--line);margin:22px 0">
+      <form id="passwordForm">
+        <b style="font-size:14px">Change password</b>
+        <div class="field"><label>Current password</label><input id="pwCurrent" type="password" required autocomplete="current-password"></div>
+        <div class="field"><label>New password (min 8 characters)</label><input id="pwNew" type="password" required minlength="8" autocomplete="new-password"></div>
+        <div class="form-error" id="pwError"></div>
+        <button class="btn btn-outline" type="submit" style="width:100%;margin-top:12px">Update password</button>
+      </form>
+    </div>
+  </div>
+  <div class="modal-backdrop" id="mineModal" onclick="if(event.target===this)closeMine()">
+    <div class="modal">
+      <div class="modal-head">
+        <h2>My submissions</h2><button class="close" onclick="closeMine()">×</button>
+      </div>
+      <div id="mineList"></div>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+</body>
+
+</html>

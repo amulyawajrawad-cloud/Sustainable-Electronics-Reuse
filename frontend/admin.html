@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReCircuit Admin</title>
+  <link rel="stylesheet" href="recircuit_frontend.css">
+  <link rel="stylesheet" href="recircuit_app.css">
+  <style>
+    body { background: var(--bg) }
+    .wrap { max-width: 1150px; margin: 0 auto; padding: 24px 5% 60px }
+    .login-card { max-width: 400px; margin: 9vh auto; background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 30px; box-shadow: 0 14px 40px #0001 }
+    .admin-bar { display: flex; justify-content: space-between; align-items: center; background: #123d2e; color: #e9fff4; padding: 14px 5% }
+    .admin-bar .brand { color: #fff }
+    .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 24px 0 }
+    .stat-grid .stat { cursor: default }
+    .chips { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0 }
+    .chips button { border: 1px solid #d5e2db; background: #fff; border-radius: 999px; padding: 7px 14px; font-weight: 700; font-size: 13px }
+    .chips button.active { background: var(--green); color: #fff; border-color: var(--green) }
+    .panel { background: #fff; border: 1px solid var(--line); border-radius: 16px; overflow: auto }
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px }
+    th { text-align: left; font-size: 11.5px; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); padding: 12px 14px; border-bottom: 1px solid var(--line); white-space: nowrap }
+    td { padding: 12px 14px; border-bottom: 1px solid #eef3f0; vertical-align: middle }
+    tr:last-child td { border-bottom: 0 }
+    .brand .role, .role { color: #e9fff4; background: #ffffff22; border-radius: 999px; padding: 3px 10px; font-size: 11px; margin-left: 8px }
+    .detail dl { display: grid; grid-template-columns: 130px 1fr; gap: 8px 12px; margin: 14px 0; font-size: 13.5px }
+    .detail dt { color: var(--muted) }
+    .detail dd { margin: 0; word-break: break-word }
+    .detail .imgs { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 }
+    .detail .imgs img { width: 110px; height: 110px; object-fit: cover; border-radius: 10px; border: 1px solid var(--line) }
+    .actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap }
+    .btn-danger { background: #b3261e; color: #fff }
+    .modal.wide { width: min(640px, 100%) }
+    @media(max-width:760px) { .stat-grid { grid-template-columns: 1fr 1fr } }
+  </style>
+  <script src="api.js" defer></script>
+  <script src="admin.js" defer></script>
+</head>
+
+<body>
+  <!-- login -->
+  <div id="loginView" class="hide">
+    <div class="login-card">
+      <div class="brand" style="margin-bottom:6px"><div class="brand-icon">↻</div>Re<span>Circuit</span></div>
+      <h2 style="margin:12px 0 4px">Admin sign in</h2>
+      <p class="muted" style="margin:0 0 8px">Authorized reviewers only. This is separate from user login.</p>
+      <form id="loginForm">
+        <div class="field"><label>Email</label><input id="aEmail" type="email" required autocomplete="username"></div>
+        <div class="field"><label>Password</label><input id="aPassword" type="password" required autocomplete="current-password"></div>
+        <div class="form-error" id="aError"></div>
+        <button class="btn btn-primary" id="aBtn" style="width:100%;margin-top:12px">Sign in</button>
+      </form>
+      <p style="text-align:center;margin:18px 0 0"><a href="/" class="text-link">← Back to marketplace</a></p>
+    </div>
+  </div>
+
+  <!-- dashboard -->
+  <div id="dashView" class="hide">
+    <div class="admin-bar">
+      <div class="brand"><div class="brand-icon">↻</div>Re<span>Circuit</span> <span class="role">Admin</span></div>
+      <div><span id="adminName"></span><span class="role" id="adminRole"></span>
+        <button class="btn btn-outline" style="margin-left:12px;padding:8px 14px" onclick="adminLogout()">Log out</button></div>
+    </div>
+    <div class="wrap">
+      <div class="stat-grid">
+        <div class="stat"><div class="stat-icon">⏳</div><div><strong id="stPending">–</strong><small>Pending review</small></div></div>
+        <div class="stat"><div class="stat-icon">✅</div><div><strong id="stApproved">–</strong><small>Approved</small></div></div>
+        <div class="stat"><div class="stat-icon">🚫</div><div><strong id="stRejected">–</strong><small>Rejected</small></div></div>
+        <div class="stat"><div class="stat-icon">👥</div><div><strong id="stUsers">–</strong><small>Registered users</small></div></div>
+      </div>
+      <div class="tabs" style="max-width:520px">
+        <button id="tabSubs" class="active" onclick="showTab('subs')">Submissions</button>
+        <button id="tabListings" onclick="showTab('listings')">Global listings</button>
+        <button id="tabUsers" onclick="showTab('users')">Users</button>
+      </div>
+      <div id="chipsRow" class="chips"></div>
+      <div class="search" style="max-width:380px;margin-bottom:14px"><span>⌕</span><input id="aSearch" type="search" placeholder="Search…" oninput="debounceLoad()"></div>
+      <div class="panel" id="tableBox"></div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="detailModal" onclick="if(event.target===this)closeDetail()">
+    <div class="modal wide detail" id="detailBox"></div>
+  </div>
+  <div class="toast" id="toast"></div>
+</body>
+
+</html>
